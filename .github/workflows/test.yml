@@ -1,0 +1,38 @@
+name: Run Tests on PR
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build Docker image
+        run: docker build -t meu-site .
+
+      - name: Run Docker container
+        run: |
+          docker run -d -p 8080:80 --name meu-site-container meu-site
+          sleep 5
+
+      - name: Run tests
+        run: pytest tests/
+
+      - name: Stop Docker container
+        run: |
+          docker stop meu-site-container
+          docker rm meu-site-container
