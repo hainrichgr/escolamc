@@ -1,0 +1,19 @@
+name: Alerta no Discord
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [closed]  # quando PR for mergeada
+
+jobs:
+  send_alert:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar alerta para Discord (Push ou Merge no main)
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d "{\"content\": \"🚀 Novo push ou merge na branch main do repositório **escolamc**!\"}" \
+          https://discordapp.com/api/webhooks/1366429623780507678/FL6mYsgfBA3sj1AtfkrGYQhijoP2g3QSYC_61wU2EUczoiCAyW6qxDNQeL20ErMEKCwc
