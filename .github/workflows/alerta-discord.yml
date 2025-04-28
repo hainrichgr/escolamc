@@ -17,3 +17,4 @@ jobs:
           -X POST \
           -d "{\"content\": \"🚀 Novo push ou merge na branch main do repositório **escolamc**!\"}" \
           https://discord.com/api/webhooks/1366429623780507678/FL6mYsgfBA3sj1AtfkrGYQhijoP2g3QSYC_61wU2EUczoiCAyW6qxDNQeL20ErMEKCwc
+#teste
